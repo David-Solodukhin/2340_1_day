@@ -23,18 +23,26 @@
 <script>
 
     function initMap() {
-        var myLatLng = {lat: -25.363, lng: 131.044};
 
+
+
+        var latlong = JSON.parse(localStorage.getItem("coords"));
+        console.log(latlong);
+        var myLatLng = {lat: parseFloat(latlong[0].lat), lng: parseFloat(latlong[0].lng)};
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 4,
             center: myLatLng
         });
+        var i = 0;
+        for(i = 0; i < latlong.length; i++) {
+            console.log(parseFloat(latlong[i].lat));
+            var marker = new google.maps.Marker({
+                position: {lat: parseFloat(latlong[i].lat), lng: parseFloat(latlong[i].lng)},
+                map: map,
+                title: 'Hello World!'
+            });
+        }
 
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            title: 'Hello World!'
-        });
 
         //iterate through all rows of table
         //get lat and long put it in obj and make the marker

@@ -47,7 +47,20 @@ $(document).ready(function() {
 
   /* code here */ });
 
+function map() {
+    var table = document.getElementById("table");
+    table.deleteRow(0);
+    console.log(table.rows[0].cells[5].innerHTML);
+    var coords = [];
+    while(table.rows.length > 0) {
+        coords.push({lat: parseFloat(table.rows[0].cells[5].innerHTML), lng: parseFloat(table.rows[0].cells[7].innerHTML)});
+        table.deleteRow(0);
 
+    }
+
+    localStorage.setItem("coords", JSON.stringify(coords));
+    document.location.href = "./map.html";
+}
 
 
 function query() {
