@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+  <script src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <script>
+      // Initialize Firebase
+
+      var config = {
+          apiKey: "AIzaSyCWehW51Hu3Szg8IYsdhM__l5qneAirYFM",
+          authDomain: "ratfinder-9d398.firebaseapp.com",
+          databaseURL: "https://ratfinder-9d398.firebaseio.com",
+          projectId: "ratfinder-9d398",
+          storageBucket: "ratfinder-9d398.appspot.com",
+          messagingSenderId: "163760963375"
+      };
+      firebase.initializeApp(config);
+  </script>
+  <meta charset="UTF-8">
+  <title>Fixed table header</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  
+      <link rel="stylesheet" href="stylesheets/sightings.css">
+
+
+</head>
+
+<body>
+  <section>
+  <!--for demo wrap-->
+  <h1>Submit a Rat Sighting</h1>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Borough</th>
+          <th>City</th>
+          <th>Created Date</th>
+          <th>Location</th>
+          <th>Zip</th>
+          <th>Longitude</th>
+          <th>Loc Type</th>
+          <th>Latitude</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0" id = "table">
+      <thead>
+      <tr>
+        <th>
+
+            <div class="group">
+              <input type="text" required id = "borough">
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <label>Borough:</label>
+            </div>
+
+
+
+
+
+
+
+        </th>
+        <th>
+
+          <div class="group">
+            <input type="text" required id = "city">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>City:</label>
+          </div>
+
+
+
+
+
+
+
+        </th>
+        <th>
+
+          <div class="group">
+            <input type="text" required id = "date">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Created Date:</label>
+          </div>
+
+
+
+
+
+
+
+        </th>
+        <th>
+
+          <div class="group">
+            <input type="text" required id = "loc">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Location:</label>
+          </div>
+
+
+
+
+
+
+
+        </th>
+        <th>
+
+          <div class="group">
+            <input type="text" required id = "zip">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Zip:</label>
+          </div>
+
+
+
+
+
+
+
+        </th>
+        <th>
+
+          <div class="group">
+            <input type="text" required id = "long">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Longitude:</label>
+          </div>
+
+
+
+
+
+
+
+        </th>
+        <th>
+
+          <div class="group">
+            <input type="text" required id = "type">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Location Type</label>
+          </div>
+
+
+
+
+
+
+
+        </th>
+        <th>
+
+          <div class="group">
+            <input type="text" required id = "lat">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Latitude</label>
+          </div>
+
+
+
+
+
+
+
+        </th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+</section>
+  <div class="container">
+
+
+
+    <button onclick="submit()">Submit Sighting</button>
+
+
+  </div>
+
+
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script  src="input.js"></script>
+
+</body>
+</html>

@@ -28,6 +28,7 @@ $(document).ready(function() {
         var formatted;
         for (key in data.val()) {
             var cell = row.insertCell(i);
+            console.log(key);
             if (key == "Created Date") {
                 var t = new Date( key );
                 var h = moment.unix(data.val()[key] / 1000);
