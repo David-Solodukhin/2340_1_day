@@ -15,7 +15,7 @@ table{
   background-color: rgba(255,255,255,0.3);
  }
 .tbl-content{
-  height:300px;
+  height:500px;
   overflow-x:auto;
   margin-top: 0px;
   border: 1px solid rgba(255,255,255,0.3);
@@ -235,6 +235,7 @@ input:focus ~ .highlight {
 #buttons {
   padding-top: 50px;
   text-align: center;
+  width: auto;
 }
 
 /* start da css for da buttons */
@@ -243,7 +244,7 @@ input:focus ~ .highlight {
   padding: 15px 25px;
   font-size: 22px;
   text-decoration: none;
-  margin: 20px;
+  margin: 10px;
   color: #fff;
   position: relative;
   display: inline-block;

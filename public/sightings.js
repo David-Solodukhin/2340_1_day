@@ -14,11 +14,23 @@ $(window).on("load resize ", function() {
 
 
 }).resize();
-$(document).ready(function() {
 
+function showInfo(data) {
+    //console.log(data);
+    var cells = data.cells;
+    var i = 0;
+    var test = [];
+    for(var i = 0; i < data.length; i++) {
+        test[i] = data[i].innerHTML;
+    }
+    console.log(test);
+    localStorage.setItem("row", JSON.stringify(test));
+    document.location.href = "./info.html";
+}
+$(document).ready(function() {
     var database = firebase.database();
 
-
+    alert("welcome " + localStorage.getItem("user"));
     var topUserPostsRef = database.ref('rat-sighting-list').orderByChild("Created Date").limitToLast(parseInt(limit));
 
     database.ref('rat-sighting-list').child("-L-93jeMGrcuhIS2kWT5").remove();
@@ -43,8 +55,16 @@ $(document).ready(function() {
             cell.innerHTML = formatted;
             i++;
         }
+        var rows = document.getElementById("table").rows;
+        $('#table').find('tr').click( function(){
+            showInfo( rows[($(this).index())].cells );
+        });
+
 
     });
+
+
+
 
 
 
@@ -136,6 +156,10 @@ function query() {
             cell.innerHTML = formatted;
             i++;
         }
+        var rows = document.getElementById("table").rows;
+        $('#table').find('tr').click( function(){
+            showInfo( rows[($(this).index())].cells );
+        });
 
     });
 

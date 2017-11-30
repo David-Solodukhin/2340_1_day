@@ -131,7 +131,7 @@ function accountQ()
        // socket.emit("failedLogIn", errorMessage);
         });
        // socket.emit("logIn", "hooray");
-
+        localStorage.setItem("user",firebase.auth().currentUser.email);
         document.location.href = "./sightings.html";
 
 
