@@ -28,9 +28,10 @@
 
         var latlong = JSON.parse(localStorage.getItem("coords"));
         console.log(latlong);
-        var myLatLng = {lat: parseFloat(latlong[0].lat), lng: parseFloat(latlong[0].lng)};
+
+        var myLatLng = {lat: parseFloat(latlong[1].lat), lng: parseFloat(latlong[1].lng)};
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
+            zoom: 7,
             center: myLatLng
         });
         var i = 0;
