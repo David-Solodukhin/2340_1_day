@@ -33,7 +33,7 @@ $(document).ready(function() {
     alert("welcome " + localStorage.getItem("user"));
     var topUserPostsRef = database.ref('rat-sighting-list').orderByChild("Created Date").limitToLast(parseInt(limit));
 
-    database.ref('rat-sighting-list').child("-L-93jeMGrcuhIS2kWT5").remove();
+    database.ref('rat-sighting-list');
     topUserPostsRef.on("child_added", function(data) {
         var newPlayer = data.val();
 

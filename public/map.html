@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+  <script>
+      // Initialize Firebase
+
+      var config = {
+          apiKey: "AIzaSyCWehW51Hu3Szg8IYsdhM__l5qneAirYFM",
+          authDomain: "ratfinder-9d398.firebaseapp.com",
+          databaseURL: "https://ratfinder-9d398.firebaseio.com",
+          projectId: "ratfinder-9d398",
+          storageBucket: "ratfinder-9d398.appspot.com",
+          messagingSenderId: "163760963375"
+      };
+      firebase.initializeApp(config);
+  </script>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="utf-8">
   <title>Simple markers</title>
@@ -22,12 +36,19 @@
 <div id="map"></div>
 <script>
 
+    var loaded;
+    var mTemp;
+    var counter = 0;
+    var database = firebase.database();
     function initMap() {
 
 
 
+
+
+
         var latlong = JSON.parse(localStorage.getItem("coords"));
-        console.log(latlong);
+       // console.log(latlong);
 
         var myLatLng = {lat: parseFloat(latlong[1].lat), lng: parseFloat(latlong[1].lng)};
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -36,7 +57,7 @@
         });
         var i = 0;
         for(i = 0; i < latlong.length; i++) {
-            console.log(parseFloat(latlong[i].lat));
+         //   console.log(parseFloat(latlong[i].lat));
             var marker = new google.maps.Marker({
                 position: {lat: parseFloat(latlong[i].lat), lng: parseFloat(latlong[i].lng)},
                 map: map,
@@ -45,9 +66,73 @@
         }
 
 
+        google.maps.event.addListener(map, 'click', function( event ){
+            placeMarker(event.latLng, map, event);
+
+
+
+
+
+        });
         //iterate through all rows of table
         //get lat and long put it in obj and make the marker
     }
+
+
+    function placeMarker(position, map, event) {
+        var marker = new google.maps.Marker({
+            position: position,
+            map: map
+        });
+
+
+
+        marker.addListener('click', function() {
+
+            //counter = 0;
+            var tmp = 0;
+            console.log("reset");
+            var topUserPostsRef = database.ref('rat-sighting-list').orderByChild("Latitude").startAt(event.latLng.lat() - 3).endAt(event.latLng.lat()+3).limitToFirst(parseInt(300));
+
+            var contentString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h1 id="firstHeading" class="firstHeading"> Reported rat sightings at - LAT:'+ position.lat()+' LONG:'+ position.lng()+' </h1>'+
+                '<div id="bodyContent">'+
+                '<p><b>Loading: Click again to refresh! </p>'+
+                '</div>'+
+                '</div>';
+            topUserPostsRef.on("child_added", function(data) {
+                loaded = data.val();
+                if (data.val()['Longitude'] >= event.latLng.lng() - 3 && data.val()['Longitude'] <= event.latLng.lng() + 3){
+
+
+                    contentString = '<div id="content">'+
+                        '<div id="siteNotice">'+
+                        '</div>'+
+                        '<h1 id="firstHeading" class="firstHeading"> Reported rat sightings at - LAT:'+ position.lat()+' LONG:'+ position.lng()+' </h1>'+
+                        '<div id="bodyContent">'+
+                        '<p><b>Watch out! Rats!</b> within a 50 mile radius approx :' + ++tmp +' rats! </p>'+
+                        '</div>'+
+                        '</div>';
+                }
+
+            });
+
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+            infowindow.open(map, marker);
+
+        });
+mTemp = marker;
+
+
+
+        //map.panTo(position);
+    }
+
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDETfsSAwAT6HhN-XNxHulVH-Fjd6gLD6g&callback=initMap">
